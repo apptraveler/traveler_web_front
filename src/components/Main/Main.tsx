@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-import Auth from '../../pages/Auth';
+import Auth from '@pages/Auth';
 
 const Main = () => {
   return (
