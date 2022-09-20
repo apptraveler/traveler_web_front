@@ -15,8 +15,6 @@ function ForgotPassword() {
     setFormData(data)
   };
 
-  console.log(watch("email")); 
-
   return (
     <form
       className={classes['forgot-password']}
@@ -31,7 +29,7 @@ function ForgotPassword() {
         {...register("email", { required: true })}
       />
       <Button
-        width={'100%'}
+        className="button -fullWidth"
         marginY={8} 
         marginRight={12}
         iconAfter={LogInIcon}
@@ -40,8 +38,8 @@ function ForgotPassword() {
       >
         Recuperar Senha
       </Button>
-      <input type="submit" />
       <Button
+        className="button -fullWidth"
         is={RouterLink}
         marginY={8} 
         marginRight={12}
