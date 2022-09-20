@@ -6,6 +6,7 @@ const Main = () => {
   return (
     <Routes>
       <Route path='/auth' element={<Auth/>}></Route>
+      <Route path='/forgot-password' element={<Auth/>}></Route>
     </Routes>
   );
 }
