@@ -1,8 +1,8 @@
-import './index.scss'
+import classes from './index.module.scss'
 
 const SignUp = () => {
   return (
-    <div className='teste'>SignUp</div>
+    <div className={classes.teste}>SignUp</div>
   )
 }
 
