@@ -1,6 +1,7 @@
 import classes from './index.module.scss'
-import { Paragraph, Pane, Tablist, Tab } from 'evergreen-ui'
+import { Pane, Tablist, Tab } from 'evergreen-ui'
 import React from 'react'
+import SignIn from '@components/Auth/SignIn'
 
 interface CardProps {
   title?: string
@@ -13,8 +14,8 @@ function Card (props: CardProps) {
 
   return (
     <div className={classes.card}>
-      <h1 className={classes.title}>{props.title}</h1>
-      <h2 className={classes.description}>{props.description}</h2>
+      {props.title && <h1 className={classes.title}>{props.title}</h1>}
+      {props.description && <h2 className={classes.description}>{props.description}</h2>}
       <Tablist marginBottom={16}>
         {tabs.map((tab, index) => (
           <Tab
@@ -24,7 +25,7 @@ function Card (props: CardProps) {
             isSelected={index === selectedIndex}
             aria-controls={`panel-${tab}`}
             appearance='primary'
-            className='teste'
+            className={classes.tab}
           >
             {tab}
           </Tab>
@@ -32,6 +33,7 @@ function Card (props: CardProps) {
       </Tablist>
       {tabs.map((tab, index) => (
         <Pane
+          className={classes['tab-pane']}
           key={tab}
           id={`panel-${tab}`}
           role="tabpanel"
@@ -39,7 +41,8 @@ function Card (props: CardProps) {
           aria-hidden={index !== selectedIndex}
           display={index === selectedIndex ? 'block' : 'none'}
         >
-          {tab}
+          {index === 0 && <SignIn />}
+          {index === 1 && <div>teste 1</div>}
         </Pane>
       ))}
     </div>

@@ -1,5 +1,11 @@
+html, 
+body, #root {
+  height: 100%;
+}
+
 .App {
   background-color: #FFFFFF;
   font-family: 'Poppins-Medium';
   position: relative;
+  height: 100%;
 }
