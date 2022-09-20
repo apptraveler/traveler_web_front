@@ -1,0 +1,15 @@
+@import "colors";
+
+.span {
+  font-size: 10px;
+
+  &.-warn {
+    color: $color-warning;
+  }
+  &.-error {
+    color: $color-error;
+  }
+  &.-success {
+    color: $color-success;
+  }
+}
