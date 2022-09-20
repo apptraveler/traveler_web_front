@@ -1,7 +1,8 @@
 import classes from './index.module.scss'
 import { Pane, Tablist, Tab } from 'evergreen-ui'
 import React from 'react'
-import SignIn from '@components/Auth/SignIn'
+import SignIn from '@components/AuthInfo/SignIn'
+import SignUp from '@components/AuthInfo/SignUp'
 
 interface CardProps {
   title?: string
@@ -42,7 +43,7 @@ function Card (props: CardProps) {
           display={index === selectedIndex ? 'block' : 'none'}
         >
           {index === 0 && <SignIn />}
-          {index === 1 && <div>teste 1</div>}
+          {index === 1 && <SignUp />}
         </Pane>
       ))}
     </div>
