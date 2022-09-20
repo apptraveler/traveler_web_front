@@ -5,18 +5,18 @@ import SignIn from '@components/AuthInfo/SignIn'
 import SignUp from '@components/AuthInfo/SignUp'
 import ForgotPassword from './ForgotPassword'
 
-interface CardProps {
+interface AuthInfoProps {
   title?: string
   description?: string
   isForgotPasswordRoute: boolean
 }
 
-function Card (props: CardProps) {
+function AuthInfo (props: AuthInfoProps) {
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const [tabs] = React.useState(['Login', 'Cadastre-se'])
 
   return (
-    <div className={classes.card}>
+    <Pane elevation={4} className={classes.card}>
       {props.title && <h1 className={classes.title}>{props.title}</h1>}
       {props.description && <h2 className={classes.description}>{props.description}</h2>}
       {!props.isForgotPasswordRoute &&
@@ -60,8 +60,8 @@ function Card (props: CardProps) {
           <ForgotPassword />
         </Pane>
       }
-    </div>
+    </Pane>
   )
 }
 
-export default Card
+export default AuthInfo
