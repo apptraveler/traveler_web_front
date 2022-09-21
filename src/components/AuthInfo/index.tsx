@@ -4,7 +4,7 @@ import React from 'react'
 import SignIn from '@components/AuthInfo/SignIn'
 import SignUp from '@components/AuthInfo/SignUp'
 import ForgotPassword from './ForgotPassword'
-import BirdLogoImage from '@images/bird-circle-logo.svg';
+import BirdLogoImage from '@images/bird-logo.svg';
 
 interface AuthInfoProps {
   title?: string
