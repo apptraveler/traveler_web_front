@@ -4,6 +4,7 @@ import React from 'react'
 import SignIn from '@components/AuthInfo/SignIn'
 import SignUp from '@components/AuthInfo/SignUp'
 import ForgotPassword from './ForgotPassword'
+import BirdLogoImage from '@images/bird-circle-logo.svg';
 
 interface AuthInfoProps {
   title?: string
@@ -18,6 +19,7 @@ function AuthInfo (props: AuthInfoProps) {
   return (
     <Pane elevation={4} className={classes.card}>
       {props.title && <h1 className={classes.title}>{props.title}</h1>}
+      <img className={classes.logo} src={BirdLogoImage} alt="bird-logo" />
       {props.description && <h2 className={classes.description}>{props.description}</h2>}
       {!props.isForgotPasswordRoute &&
         <>
