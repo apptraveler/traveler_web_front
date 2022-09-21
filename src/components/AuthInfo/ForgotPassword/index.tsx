@@ -5,7 +5,6 @@ import classes from './index.module.scss'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { validateEmail } from "@utils/validators"
 
 function ForgotPassword() {
   const schema = yup.object({
