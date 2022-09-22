@@ -4,15 +4,11 @@ import { Link as RouterLink } from 'react-router-dom'
 import classes from './index.module.scss'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import { authSchema } from '@utils/validation'
 
 function ForgotPassword() {
-  const schema = yup.object({
-    email: yup.string().email().required(),
-  }).required();
-
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(authSchema)
   });
 
   const onSubmit = (data: any) => {
@@ -34,7 +30,7 @@ function ForgotPassword() {
         placeholder="Digite seu e-mail"
         required
         isInvalid={!!errors.email}
-        validationMessage={!!errors.email ? 'Insira um e-mail válido' : undefined}
+        validationMessage={!!errors.email ? errors.email.message : undefined}
         {...register("email")}
       />
       <Button

@@ -4,23 +4,18 @@ import { Link as RouterLink } from 'react-router-dom'
 import classes from './index.module.scss'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import { authSchema } from '@utils/validation'
 
 function SignIn() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(authSchema)
+  });
+
   const [formData, setFormData] = React.useState({
     email: ''
   })
 
   const [submitError, setSubmitError] = React.useState(false)
-
-  const schema = yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().required()
-  }).required();
-
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
-  });
 
   const onSubmit = (data: any) => {
     setFormData(data)
@@ -36,7 +31,7 @@ function SignIn() {
         label="E-mail"
         placeholder="Digite seu e-mail"
         isInvalid={!!errors.email}
-        validationMessage={!!errors.email ? 'Insira um e-mail válido' : undefined}
+        validationMessage={!!errors.email ? errors.email.message : undefined}
         required
         {...register("email")}
       />
@@ -44,7 +39,7 @@ function SignIn() {
         label="Senha"
         placeholder="Digite sua senha"
         isInvalid={!!errors.password}
-        validationMessage={!!errors.password ? 'Senha obrigatória' : undefined}
+        validationMessage={!!errors.password ? errors.password.message : undefined}
         required
         {...register("password")}
       />
