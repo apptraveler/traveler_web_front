@@ -1,23 +1,59 @@
-import { Link, TextInputField, Button, LogInIcon } from 'evergreen-ui'
+import { Link, TextInputField, Button, LogInIcon, InlineAlert } from 'evergreen-ui'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import classes from './index.module.scss'
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 function SignIn() {
-  const [value, setValue] = React.useState('')
+  const [formData, setFormData] = React.useState({
+    email: ''
+  })
+
+  const [submitError, setSubmitError] = React.useState(false)
+
+  const schema = yup.object({
+    email: yup.string().email().required(),
+    password: yup.string().required()
+  }).required();
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
+
+  const onSubmit = (data: any) => {
+    setFormData(data)
+    setSubmitError(true)
+  };
 
   return (
-    <div className={classes['sign-in']}>
+    <form
+      className={classes['sign-in']}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <TextInputField
         label="E-mail"
         placeholder="Digite seu e-mail"
+        isInvalid={!!errors.email}
+        validationMessage={!!errors.email ? 'Insira um e-mail válido' : undefined}
         required
+        {...register("email")}
       />
       <TextInputField
         label="Senha"
         placeholder="Digite sua senha"
+        isInvalid={!!errors.password}
+        validationMessage={!!errors.password ? 'Senha obrigatória' : undefined}
         required
+        {...register("password")}
       />
+      {submitError && <InlineAlert
+        intent="danger"
+        marginBottom={20}
+      >
+        E-mail ou senha incorretos
+      </InlineAlert>}
       <Link
         is={RouterLink}
         className={classes.link}
@@ -35,7 +71,7 @@ function SignIn() {
       >
         Entrar
       </Button>
-    </div>
+    </form>
   )
 }
 
