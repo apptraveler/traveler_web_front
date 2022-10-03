@@ -9,7 +9,7 @@ const Main = () => {
     <Routes>
       <Route path='/auth' element={<Auth/>}></Route>
       <Route path='/forgot-password' element={<Auth/>}></Route>
-      <Route path='/profile-form/:currentStep' element={<ProfileForm/>}></Route>
+      <Route path='/profile-form' element={<ProfileForm/>}></Route>
       <Route path='*' element={<NotFound/>}></Route>
     </Routes>
   );
