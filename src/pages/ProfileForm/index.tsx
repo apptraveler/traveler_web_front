@@ -83,26 +83,26 @@ const ProfileForm = () => {
       <form className={classes['form-container']}>
         <Heading className={classes['heading']} fontSize="25px">{currentQuestion.label}</Heading>
         <Pane className={classes['content-container']}>
-          {currentAnswers.map((answerLabel, index) => (
-            <Pane key={answerLabel} className={classes['content']}>
+          {currentAnswers.map((answer, index) => (
+            <Pane key={answer.label} className={classes['content']}>
               {isCurrentStepMultipleAnswer ? (
                 <Checkbox
                   className={classes['checkbox']}
-                  label={answerLabel}
-                  value={answerLabel}
-                  checked={formResponse[`step-${currentStep}`]?.indexOf(answerLabel) > -1}
+                  label={answer.label}
+                  value={String(answer.value)}
+                  checked={formResponse[`step-${currentStep}`]?.indexOf(String(answer.value)) > -1}
                   onChange={e => handleCheckAnswer(e.target.value)}
                 />
               ) : (
                 <Button
                   className={classes['button']}
                   type='button'
-                  value={answerLabel}
-                  appearance={formResponse[`step-${currentStep}`]?.indexOf(answerLabel) > -1 ? 'primary' : 'default'}
+                  value={answer.value}
+                  appearance={formResponse[`step-${currentStep}`]?.indexOf(String(answer.value)) > -1 ? 'primary' : 'default'}
                   size='large'
                   onClick={(e: any) => handleClickAnswer(e.target.value)}
                 >
-                  {answerLabel}
+                  {answer.label}
                 </Button>
               )}
             </Pane>
