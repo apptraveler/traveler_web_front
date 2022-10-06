@@ -1,3 +1,5 @@
+@import '@assets/styles/index.scss';
+
 .profile-form-page {
   position: relative;
   height: 100%;
@@ -15,7 +17,7 @@
     top: 50%; 
     left: 50%;
     min-height: 50%;
-    background: #FFFFFF;
+    background: $color-white;
     width: 600px;
     transform: translate(-50%, -50%);
     text-align: center;
