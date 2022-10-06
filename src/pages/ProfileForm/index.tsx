@@ -15,17 +15,32 @@ const ProfileForm = () => {
 
   const limitForwardNavigation = currentStep >= stepsCounter - 1
   const limitBackNavigation = currentStep <= 0
+  const isCurrentStepMultipleAnswer = currentQuestion.type === 'multiple'
+
+  function checkDisabledForward() {
+    let conditionToDisable
+
+    if (isCurrentStepMultipleAnswer) {
+      conditionToDisable = formResponse[`step-${currentStep}`]?.length > 0
+    } else {
+      conditionToDisable = formResponse[`step-${currentStep}`]
+    }
+
+    return conditionToDisable
+      ? false
+      : true
+  }
 
   function handleClickAnswer(value: any) {
     if (formResponse[`step-${currentStep}`]?.indexOf(value) > -1) {
       setFormResponse({
         ...formResponse,
-        [`step-${currentStep}`]: formResponse[`step-${currentStep}`].filter((item: string) => item !== value)
+        [`step-${currentStep}`]: ''
       })
     } else {
       setFormResponse({
         ...formResponse,
-        [`step-${currentStep}`]: [...formResponse[`step-${currentStep}`] || [], value]
+        [`step-${currentStep}`]: value
       })
     }
   }
@@ -70,7 +85,7 @@ const ProfileForm = () => {
         <Pane className={classes['content-container']}>
           {currentAnswers.map((answerLabel, index) => (
             <Pane key={answerLabel} className={classes['content']}>
-              {currentQuestion.type === 'multiple' ? (
+              {isCurrentStepMultipleAnswer ? (
                 <Checkbox
                   className={classes['checkbox']}
                   label={answerLabel}
@@ -106,9 +121,10 @@ const ProfileForm = () => {
           }
           <Button
             size='large'
-            type='button'
+            type={!limitForwardNavigation ? 'button' : 'submit'} 
             marginRight={16}
             appearance="primary"
+            disabled={checkDisabledForward()}
             onClick={() => navigateQuiz('forward')}
           >
             {!limitForwardNavigation ? 'Avançar' : 'Concluir'} 
