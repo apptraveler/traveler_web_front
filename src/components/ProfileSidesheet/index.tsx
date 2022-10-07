@@ -2,6 +2,7 @@ import { Pane, Avatar, SideSheet, Button, Paragraph, UserIcon, Badge, Heading } 
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import PhotographerImage from '@images/profiles/photographer.svg';
+import classes from './index.module.scss'
 
 function ProfileSidesheet () {
   const navigate = useNavigate()
@@ -9,6 +10,10 @@ function ProfileSidesheet () {
 
   function redirectToProfileForm() {
     navigate('/profile-form')
+  }
+
+  function logOut() {
+
   }
 
   return (
@@ -43,7 +48,7 @@ function ProfileSidesheet () {
           >
             <Heading fontSize='18px' marginBottom='1rem'>Mais sobre seu Perfil</Heading>
             <Paragraph marginBottom='1rem' size='large'>O perfil de fótografo gosta de tirar fotos de tudo que vê pela frente, registrar os momentos é o que é importante, detalhes pra você são a chave.</Paragraph>
-            <img width='50%' src={PhotographerImage} alt="aboutphoto" align-self='center' />
+            <img className={classes.image} src={PhotographerImage} alt="aboutphoto" />
           </Pane>
           <Pane
             display='flex'
@@ -61,10 +66,18 @@ function ProfileSidesheet () {
             </Paragraph>
             <Button
               size='medium'
+              marginBottom='3rem'
               appearance="primary"
               onClick={() => redirectToProfileForm()}
             >
               Refazer
+            </Button>
+            <Button
+              size='medium'
+              intent='danger'
+              onClick={() => logOut()}
+            >
+              Sair
             </Button>
           </Pane>
         </Pane>
