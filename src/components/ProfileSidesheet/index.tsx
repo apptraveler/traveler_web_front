@@ -20,10 +20,10 @@ function ProfileSidesheet () {
             marginBottom='1rem'
             color="blue"
           />
-          <Paragraph size={18}>Igor Duarte</Paragraph>
+          <Paragraph size='large'>Igor Duarte</Paragraph>
         </Pane>
       </SideSheet>
-      <Button size="large" iconAfter={UserIcon} onClick={() => setIsShown(true)}>Ver Perfil</Button>
+      <Button size="large" appearance='primary' iconAfter={UserIcon} onClick={() => setIsShown(true)}>Ver Perfil</Button>
     </>
   )
 }

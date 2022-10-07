@@ -9,6 +9,7 @@ function MainLayout(props: any) {
         <ProfileSidesheet></ProfileSidesheet>
       </Pane>
       <DashboardList></DashboardList>
+      <DashboardList></DashboardList>
     </Pane>
   )
 }
