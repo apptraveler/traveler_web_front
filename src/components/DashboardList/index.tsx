@@ -4,7 +4,11 @@ import { useState } from 'react'
 import DestinyInfo from '@components/DestinyInfo';
 import classes from './index.module.scss'
 
-function DashboardList () {
+interface IDashboardListProps {
+  currentTab: number
+}
+
+function DashboardList (props: IDashboardListProps) {
   const [isShown, setIsShown] = useState(false)
 
   function redirectToWeatherInfo() {
@@ -79,7 +83,7 @@ function DashboardList () {
           iconAfter={ListDetailViewIcon}
           size='large'
         >
-          Ver detalhes
+          Visualização rápida
         </Button>
       </Pane>
       <SideSheet position='top' isShown={isShown} onCloseComplete={() => setIsShown(false)}>
