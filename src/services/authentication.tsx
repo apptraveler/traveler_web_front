@@ -37,6 +37,20 @@ export interface ILoginParams {
   name: string,
   password: string
 }
+export interface ILoginResponse {
+  success: boolean,
+  data: {
+    token: string
+  },
+  errors: [
+    {
+      timestamp: string,
+      code: string,
+      message: string,
+      paramName: string
+    }
+  ]
+}
 export const Login = (userData: ILoginParams): any => {
   return AxiosInstance.post(`${defaultPath}/login`, userData)
     .then((response) => {

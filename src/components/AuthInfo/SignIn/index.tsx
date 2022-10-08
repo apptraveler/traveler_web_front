@@ -5,7 +5,7 @@ import classes from './index.module.scss'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema } from '@utils/validation'
-import { Login, ILoginParams } from '@services/authentication';
+import { Login, ILoginParams, ILoginResponse } from '@services/authentication';
 
 function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm<ILoginParams>({
@@ -23,7 +23,7 @@ function SignIn() {
     setIsLoading(true)
     setFormData(data)
     Login(data)
-      .then((response: any) => {
+      .then((response: ILoginResponse) => {
         console.log(response)
       })
       .finally(() => {

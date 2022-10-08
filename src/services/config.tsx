@@ -6,7 +6,8 @@ const axiosInstance = axios.create({
 });
 
 function errorHandler(error: any) {
-  toaster.danger('Ocorreu um erro ao realizar a requisição, por favor tente novamente mais tarde.')
+  console.log(error)
+  toaster.danger('Ocorreu um erro ao realizar a requisição, por favor tente novamente mais tarde.', { duration: 3 })
 }
 
 axiosInstance.interceptors.response.use(

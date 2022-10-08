@@ -3,7 +3,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpSchema } from '@utils/validation'
-import { Register, IRegisterParams } from '@services/authentication';
+import { Register, IRegisterParams, IRegisterResponse } from '@services/authentication';
 
 function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm<IRegisterParams>({
@@ -20,7 +20,7 @@ function SignIn() {
   const onSubmit: SubmitHandler<IRegisterParams> = async (data) => {
     setFormData(data)
     await Register(data)
-      .then((response: any) => {
+      .then((response: IRegisterResponse) => {
         console.log(response)
       })
       .finally(() => {
