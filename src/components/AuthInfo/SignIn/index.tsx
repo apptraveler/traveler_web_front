@@ -1,25 +1,34 @@
-import { Link, TextInputField, Button, LogInIcon, InlineAlert } from 'evergreen-ui'
+import { Link, TextInputField, Button, LogInIcon } from 'evergreen-ui'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import classes from './index.module.scss'
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { authSchema } from '@utils/validation'
+import { signInSchema } from '@utils/validation'
+import { Login, ILoginParams } from '@services/authentication';
 
 function SignIn() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(authSchema)
+  const { register, handleSubmit, formState: { errors } } = useForm<ILoginParams>({
+    resolver: yupResolver(signInSchema)
   });
 
   const [formData, setFormData] = React.useState({
-    email: ''
+    email: '',
+    password: ''
   })
 
-  const [submitError, setSubmitError] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<ILoginParams> = async (data: any) => {
+    setIsLoading(true)
     setFormData(data)
-    setSubmitError(true)
+    Login(data)
+      .then((response: any) => {
+        console.log(response)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   };
 
   return (
@@ -43,22 +52,18 @@ function SignIn() {
         required
         {...register("password")}
       />
-      {submitError && <InlineAlert
-        intent="danger"
-        marginBottom={20}
-      >
-        E-mail ou senha incorretos
-      </InlineAlert>}
       <Link
         is={RouterLink}
         className={classes.link}
-        size={1}
+        size='small'
         to="/forgot-password"
       >
         Esqueci minha senha
       </Link>
       <Button
         width={'100%'}
+        type='submit'
+        isLoading={isLoading}
         marginY={8} 
         marginRight={12}
         iconAfter={LogInIcon}

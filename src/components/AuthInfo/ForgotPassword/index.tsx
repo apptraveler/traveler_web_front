@@ -4,11 +4,11 @@ import { Link as RouterLink } from 'react-router-dom'
 import classes from './index.module.scss'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { authSchema } from '@utils/validation'
+import { forgotPasswordSchema } from '@utils/validation'
 
 function ForgotPassword() {
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(authSchema)
+    resolver: yupResolver(forgotPasswordSchema)
   });
 
   const onSubmit = (data: any) => {

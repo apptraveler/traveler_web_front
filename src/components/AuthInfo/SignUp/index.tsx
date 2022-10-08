@@ -1,12 +1,13 @@
 import { TextInputField, Button, NewPersonIcon } from 'evergreen-ui'
 import React from 'react'
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { authSchema } from '@utils/validation'
+import { signUpSchema } from '@utils/validation'
+import { Register, IRegisterParams } from '@services/authentication';
 
 function SignIn() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(authSchema)
+  const { register, handleSubmit, formState: { errors } } = useForm<IRegisterParams>({
+    resolver: yupResolver(signUpSchema)
   });
 
   const [formData, setFormData] = React.useState({
@@ -14,10 +15,17 @@ function SignIn() {
   })
 
   const [submitError, setSubmitError] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<IRegisterParams> = async (data) => {
     setFormData(data)
-    setSubmitError(true)
+    await Register(data)
+      .then((response: any) => {
+        console.log(response)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   };
 
   return (
@@ -58,7 +66,8 @@ function SignIn() {
       />
       <Button
         width={'100%'}
-        marginY={8} 
+        marginY={8}
+        isLoading={isLoading}
         marginRight={12}
         iconAfter={NewPersonIcon}
         appearance='primary'
