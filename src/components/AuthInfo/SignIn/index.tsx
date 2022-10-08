@@ -46,6 +46,7 @@ function SignIn() {
       />
       <TextInputField
         label="Senha"
+        type="password"
         placeholder="Digite sua senha"
         isInvalid={!!errors.password}
         validationMessage={!!errors.password ? errors.password.message : undefined}

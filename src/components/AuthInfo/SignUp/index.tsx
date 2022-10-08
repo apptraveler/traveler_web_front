@@ -50,6 +50,7 @@ function SignIn() {
       />
       <TextInputField
         label="Senha"
+        type="password"
         placeholder="Digite sua senha"
         required
         isInvalid={!!errors.password}
@@ -58,6 +59,7 @@ function SignIn() {
       />
       <TextInputField
         label="Confirmação de senha"
+        type="password"
         placeholder="Confirme sua senha"
         required
         isInvalid={!!errors.confirmPassword}
