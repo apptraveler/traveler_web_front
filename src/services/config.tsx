@@ -1,6 +1,18 @@
 import axios from 'axios';
 import { toaster } from 'evergreen-ui';
 
+export interface ICommonResponseType {
+  success: boolean,
+  errors: [
+    {
+      timestamp: string
+      code: string
+      message: string
+      paramName: string
+    }
+  ]
+}
+
 const axiosInstance = axios.create({
   baseURL: `http://jsonplaceholder.typicode.com/`
 });

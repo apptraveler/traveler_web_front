@@ -1,4 +1,4 @@
-import AxiosInstance from '@services/config'
+import AxiosInstance, { ICommonResponseType } from '@services/config'
 
 const defaultPath = 'traveler/Authentication/v1'
 
@@ -8,19 +8,10 @@ export interface IRegisterParams {
   password: string,
   confirmPassword: string
 }
-export interface IRegisterResponse {
-  success: boolean,
+export interface IRegisterResponse extends ICommonResponseType {
   data: {
     token: string
   },
-  errors: [
-    {
-      timestamp: string,
-      code: string,
-      message: string,
-      paramName: string
-    }
-  ]
 }
 export const Register = (userData: IRegisterParams): any => {
   return AxiosInstance.post(`${defaultPath}/register`, userData)
@@ -37,19 +28,10 @@ export interface ILoginParams {
   name: string,
   password: string
 }
-export interface ILoginResponse {
-  success: boolean,
+export interface ILoginResponse extends ICommonResponseType {
   data: {
     token: string
   },
-  errors: [
-    {
-      timestamp: string,
-      code: string,
-      message: string,
-      paramName: string
-    }
-  ]
 }
 export const Login = (userData: ILoginParams): any => {
   return AxiosInstance.post(`${defaultPath}/login`, userData)
