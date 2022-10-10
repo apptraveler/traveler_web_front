@@ -1,4 +1,4 @@
-import { Pane, Pagination, Heading, Paragraph, DollarIcon, Button, ListDetailViewIcon, TemperatureIcon, Tooltip, SideSheet } from 'evergreen-ui'
+import { Pane, Pagination, Heading, Paragraph, DollarIcon, Button, HeartIcon, ListDetailViewIcon, TemperatureIcon, Tooltip, SideSheet } from 'evergreen-ui'
 import StressImage from '@images/Stress.svg';
 import { useState } from 'react'
 import DestinyInfo from '@components/DestinyInfo';
@@ -10,9 +10,14 @@ interface IDashboardListProps {
 
 function DashboardList (props: IDashboardListProps) {
   const [isShown, setIsShown] = useState(false)
+  const [isFavDestiny, setIsFavDestiny] = useState(false)
 
   function redirectToWeatherInfo() {
     window.open('https://weather.com/pt-BR/clima/hoje/l/da2be3197b9161d9455d2682c6f8adbef50e47eee836468d3333deb460c3c4dc', '_blank');
+  }
+
+  function toggleFav() {
+    setIsFavDestiny(!isFavDestiny)
   }
 
   return (
@@ -44,9 +49,22 @@ function DashboardList (props: IDashboardListProps) {
         flexDirection='column'
       >
         <Pane marginBottom='1rem'>
-          <Heading marginBottom='1rem'>
+          <Pane
+            display='flex'
+            justifyContent='space-between'
+            alignItems='center'
+            marginBottom='1rem'
+          >
             Cancún
-          </Heading>
+            <Tooltip content={isFavDestiny ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}>
+              <HeartIcon
+                onClick={toggleFav}
+                cursor='pointer'
+                color={isFavDestiny ? 'red' : 'muted'}
+                size={30}
+              />
+            </Tooltip>
+          </Pane>
           <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi delectus quibusdam reprehenderit quisquam animi, quidem officiis velit dolorum architecto voluptatem maiores deserunt ea laboriosam dolorem nam aliquam voluptas rem consectetur.</Paragraph>
         </Pane>
         <Pane 
