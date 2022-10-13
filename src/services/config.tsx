@@ -14,16 +14,16 @@ export interface ICommonResponseType {
 }
 
 const axiosInstance = axios.create({
-  baseURL: `http://jsonplaceholder.typicode.com/`
+  baseURL: `https://traveler-identity-develop.herokuapp.com/`
 });
 
 function errorHandler(error: any) {
-  console.log(error)
+  console.log('esse é o erro', error)
   toaster.danger('Ocorreu um erro ao realizar a requisição, por favor tente novamente mais tarde.', { duration: 3 })
 }
 
 axiosInstance.interceptors.response.use(
-  (response) => {return response},
+  (response) => {return response.data},
   (error) => errorHandler(error)
 );
 
