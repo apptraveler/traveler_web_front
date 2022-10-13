@@ -9,9 +9,7 @@ export interface IRegisterParams {
   confirmPassword: string
 }
 export interface IRegisterResponse extends ICommonResponseType {
-  data: {
-    token: string
-  },
+  token: string
 }
 export const Register = (userData: IRegisterParams): any => {
   return AxiosInstance.post(`${defaultPath}/register`, userData)
@@ -29,9 +27,7 @@ export interface ILoginParams {
   password: string
 }
 export interface ILoginResponse extends ICommonResponseType {
-  data: {
-    token: string
-  },
+  token: string
 }
 export const Login = (userData: ILoginParams): any => {
   return AxiosInstance.post(`${defaultPath}/login`, userData)

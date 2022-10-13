@@ -1,6 +1,6 @@
 import { Link, TextInputField, Button, LogInIcon } from 'evergreen-ui'
 import React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import classes from './index.module.scss'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +8,7 @@ import { signInSchema } from '@utils/validation'
 import { Login, ILoginParams, ILoginResponse } from '@services/authentication';
 
 function SignIn() {
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm<ILoginParams>({
     resolver: yupResolver(signInSchema)
   });
@@ -19,12 +20,17 @@ function SignIn() {
 
   const [isLoading, setIsLoading] = React.useState(false)
 
+  const setAuthToken = (token: string) => {
+    console.log(token)
+  }
+
   const onSubmit: SubmitHandler<ILoginParams> = async (data: any) => {
     setIsLoading(true)
     setFormData(data)
     Login(data)
       .then((response: ILoginResponse) => {
-        console.log(response)
+        setAuthToken(response.token)
+        navigate('/profile-form')
       })
       .finally(() => {
         setIsLoading(false)
