@@ -54,6 +54,7 @@ function SignIn() {
         placeholder="Digite sua senha"
         required
         isInvalid={!!errors.password}
+        autoComplete='on'
         validationMessage={!!errors.password ? errors.password.message : undefined}
         {...register("password")}
       />
@@ -63,6 +64,7 @@ function SignIn() {
         placeholder="Confirme sua senha"
         required
         isInvalid={!!errors.confirmPassword}
+        autoComplete='on'
         validationMessage={!!errors.confirmPassword ? errors.confirmPassword.message : undefined}
         {...register("confirmPassword")}
       />

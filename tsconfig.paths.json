@@ -5,6 +5,8 @@
       "@pages/*" : ["./pages/*"],
       "@layouts/*" : ["./layouts/*"],
       "@components/*" : ["./components/*"],
+      "@routeGuard/*" : ["./routeGuard/*"],
+      "@store/*" : ["./store/*"],
       "@utils/*" : ["./utils/*"],
       "@assets/*" : ["./assets/*"],
       "@services/*" : ["./services/*"],

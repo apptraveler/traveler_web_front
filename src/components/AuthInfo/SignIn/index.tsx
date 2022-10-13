@@ -7,7 +7,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema } from '@utils/validation'
 import { Login, ILoginParams, ILoginResponse } from '@services/authentication';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setAuthToken } from '@store/authentication'
+
 function SignIn() {
+  const authToken = useSelector((state: any) => state.auth)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm<ILoginParams>({
     resolver: yupResolver(signInSchema)
@@ -20,17 +25,14 @@ function SignIn() {
 
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const setAuthToken = (token: string) => {
-    console.log(token)
-  }
-
   const onSubmit: SubmitHandler<ILoginParams> = async (data: any) => {
     setIsLoading(true)
     setFormData(data)
+
     Login(data)
       .then((response: ILoginResponse) => {
-        setAuthToken(response.token)
-        navigate('/profile-form')
+        dispatch(setAuthToken('teste de token'))
+        //navigate('/profile-form')
       })
       .finally(() => {
         setIsLoading(false)
@@ -56,6 +58,7 @@ function SignIn() {
         placeholder="Digite sua senha"
         isInvalid={!!errors.password}
         validationMessage={!!errors.password ? errors.password.message : undefined}
+        autoComplete='on'
         required
         {...register("password")}
       />
