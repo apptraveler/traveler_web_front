@@ -1,10 +1,9 @@
-import { TextInputField, Button, NewPersonIcon } from 'evergreen-ui'
+import { TextInputField, Button, NewPersonIcon, toaster } from 'evergreen-ui'
 import React from 'react'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpSchema } from '@utils/validation'
 import { Register, IRegisterForm, IRegisterResponse } from '@services/authentication';
-import { toaster } from 'evergreen-ui';
 
 import { useDispatch } from 'react-redux'
 import { setAuthToken } from '@store/authentication'
