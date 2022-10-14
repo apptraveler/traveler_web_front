@@ -1,4 +1,4 @@
-import { Link, TextInputField, Button, LogInIcon } from 'evergreen-ui'
+import { Link, TextInputField, Button, LogInIcon, toaster } from 'evergreen-ui'
 import React from 'react'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import classes from './index.module.scss'
@@ -30,8 +30,12 @@ function SignIn() {
 
     Login(data)
       .then((response: ILoginResponse) => {
-        dispatch(setAuthToken('teste de token'))
-        //navigate('/profile-form')
+        if (response.success) {
+          toaster.success('Login realizado com sucesso', { duration: 3 })
+          const token = response.data.token
+          dispatch(setAuthToken(token))
+        }
+        navigate('/profile-form')
       })
       .finally(() => {
         setIsLoading(false)
