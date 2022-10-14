@@ -3,10 +3,10 @@ import React from 'react'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpSchema } from '@utils/validation'
-import { Register, IRegisterParams, IRegisterResponse } from '@services/authentication';
+import { Register, IRegisterParams, IRegisterForm, IRegisterResponse } from '@services/authentication';
 
 function SignIn() {
-  const { register, handleSubmit, formState: { errors } } = useForm<IRegisterParams>({
+  const { register, handleSubmit, formState: { errors } } = useForm<IRegisterForm>({
     resolver: yupResolver(signUpSchema)
   });
 
@@ -14,12 +14,17 @@ function SignIn() {
     email: ''
   })
 
-  const [submitError, setSubmitError] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
   const onSubmit: SubmitHandler<IRegisterParams> = async (data) => {
+    setIsLoading(true)
     setFormData(data)
-    await Register(data)
+    const registerData = {
+      email: data.email,
+      name: data.name,
+      password: data.password,
+    }
+    await Register(registerData)
       .then((response: IRegisterResponse) => {
         console.log(response)
       })

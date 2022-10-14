@@ -2,11 +2,16 @@ import AxiosInstance, { ICommonResponseType } from '@services/config'
 
 const defaultPath = 'traveler/Authentication/v1'
 
-export interface IRegisterParams {
+export interface IRegisterForm {
   email: string,
   name: string,
   password: string,
   confirmPassword: string
+}
+export interface IRegisterParams {
+  email: string,
+  name: string,
+  password: string
 }
 export interface IRegisterResponse extends ICommonResponseType {
   token: string
