@@ -34,9 +34,11 @@ function SignIn() {
           toaster.success('Login realizado com sucesso', { duration: 3 })
           const token = response.data.token
           dispatch(setAuthToken(token))
+          const conditionalRedirect = response.data.travelProfileCreated ? '/dashboard' : '/profile-form'
+          setTimeout(() => {
+            navigate(conditionalRedirect)
+          }, 1)
         }
-        const conditionalRedirect = true ? '/profile-form' : '/dashboard'
-        navigate(conditionalRedirect)
       })
       .finally(() => {
         setIsLoading(false)
