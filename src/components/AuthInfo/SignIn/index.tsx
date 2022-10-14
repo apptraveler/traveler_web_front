@@ -35,7 +35,8 @@ function SignIn() {
           const token = response.data.token
           dispatch(setAuthToken(token))
         }
-        navigate('/profile-form')
+        const conditionalRedirect = true ? '/profile-form' : '/dashboard'
+        navigate(conditionalRedirect)
       })
       .finally(() => {
         setIsLoading(false)

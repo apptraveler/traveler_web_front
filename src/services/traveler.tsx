@@ -12,7 +12,7 @@ export interface IPutProfileInfoResponse extends ICommonResponseType {
     token: string
   },
 }
-export const putProfileInfo = (userData: IPutProfileInfoParams): any => {
+export const PutProfileInfo = (userData: IPutProfileInfoParams): any => {
   return AxiosInstance.put(`${defaultPath}/profile`, userData)
     .then((response) => {
       return response.data

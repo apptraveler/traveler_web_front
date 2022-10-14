@@ -1,10 +1,11 @@
 import classes from './index.module.scss'
-import { useLocation } from 'react-router-dom';
 import GlobalLogisticsImage from '@images/Global-logistics-delivery-network.svg';
 import formStepsJSON from './formSteps'
-import { Checkbox, Heading, TextInputField, Paragraph, Pane, Button } from 'evergreen-ui'
-import { useState, useMemo, useCallback } from 'react';
-import { useEffect } from 'react';
+import { Checkbox, Heading, Pane, Button, toaster } from 'evergreen-ui'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+
+import { IPutProfileInfoResponse, PutProfileInfo } from '@services/traveler';
 
 const ProfileForm = () => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -12,10 +13,13 @@ const ProfileForm = () => {
   const [currentAnswers, setCurrentAnswers] = useState(formStepsJSON[0].answer)
   const [stepsCounter] = useState(formStepsJSON.length)
   const [formResponse, setFormResponse] = useState<any>({})
+  const navigate = useNavigate()
 
   const limitForwardNavigation = currentStep >= stepsCounter - 1
   const limitBackNavigation = currentStep <= 0
   const isCurrentStepMultipleAnswer = currentQuestion.type === 'multiple'
+
+  const [isLoading, setIsLoading] = useState(false)
 
   function checkDisabledForward() {
     let conditionToDisable
@@ -66,10 +70,25 @@ const ProfileForm = () => {
 
   function navigateQuiz(direction: string) {
     let destinationStep
-    if (direction === 'forward' && !limitForwardNavigation) {
-      destinationStep = currentStep + 1
-      setCurrentStep(destinationStep)
-      updateQuestionAndAnswer(destinationStep)
+    if (direction === 'forward') {
+      if(!limitForwardNavigation) {
+        destinationStep = currentStep + 1
+        setCurrentStep(destinationStep)
+        updateQuestionAndAnswer(destinationStep)
+      }
+      else {
+        setIsLoading(true)
+        PutProfileInfo(formResponse)
+          .then((response: IPutProfileInfoResponse) => {
+            if (response.success) {
+              toaster.success('Formulário realizado com sucesso', { duration: 3 })
+              navigate('/dashboard')
+            }
+          })
+          .finally(() => {
+            setIsLoading(false)
+          })
+      }
     }
     if (direction === 'back' && !limitBackNavigation) {
       destinationStep = currentStep - 1
@@ -121,9 +140,10 @@ const ProfileForm = () => {
           }
           <Button
             size='large'
-            type={!limitForwardNavigation ? 'button' : 'submit'} 
+            type='button'
             marginRight={16}
             appearance="primary"
+            isLoading={isLoading}
             disabled={checkDisabledForward()}
             onClick={() => navigateQuiz('forward')}
           >
