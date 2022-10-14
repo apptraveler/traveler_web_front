@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import PrivateRoute from '@routeGuard/PrivateRoute';
+import AuthRoute from '@routeGuard/AuthRoute';
 
 import Auth from '@pages/Auth';
 import ProfileForm from '@pages/ProfileForm';
@@ -13,8 +14,22 @@ const Main = () => {
 
   return (
     <Routes>
-      <Route path='/auth' element={<Auth/>}/>
-      <Route path='/forgot-password' element={<Auth/>}/>
+      <Route
+        path='/auth'
+        element={
+          <AuthRoute token={authToken}>
+            <Auth/>
+          </AuthRoute>
+        }
+      />
+      <Route
+        path='/forgot-password'
+        element={
+          <AuthRoute token={authToken}>
+            <Auth/>
+          </AuthRoute>
+        }
+      />
       <Route
         path='/dashboard'
         element={
