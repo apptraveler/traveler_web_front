@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import PhotographerImage from '@images/profiles/photographer.svg';
 import classes from './index.module.scss'
 
+import { useDispatch } from 'react-redux'
+import { setAuthToken } from '@store/authentication'
+
 function ProfileSidesheet () {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [isShown, setIsShown] = useState(false)
 
@@ -12,8 +16,8 @@ function ProfileSidesheet () {
     navigate('/profile-form')
   }
 
-  function logOut() {
-
+  function logout() {
+    dispatch(setAuthToken(''))
   }
 
   return (
@@ -75,7 +79,7 @@ function ProfileSidesheet () {
             <Button
               size='medium'
               intent='danger'
-              onClick={() => logOut()}
+              onClick={() => logout()}
             >
               Sair
             </Button>
