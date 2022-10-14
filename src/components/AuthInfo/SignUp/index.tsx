@@ -36,8 +36,8 @@ function SignIn() {
           toaster.success('Usuário criado com sucesso', { duration: 3 })
           const token = response.data.token
           dispatch(setAuthToken(token))
+          navigate('/profile-form')
         }
-        navigate('/profile-form')
       })
       .finally(() => {
         setIsLoading(false)
