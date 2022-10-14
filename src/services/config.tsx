@@ -3,6 +3,7 @@ import { toaster } from 'evergreen-ui';
 
 export interface ICommonResponseType {
   success: boolean,
+  data: any,
   errors: [
     {
       timestamp: string
@@ -28,7 +29,7 @@ function errorHandler(error: any) {
 }
 
 axiosInstance.interceptors.response.use(
-  (response) => {return response.data},
+  (response) => {return response},
   (error) => errorHandler(error)
 );
 

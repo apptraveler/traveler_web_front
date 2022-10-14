@@ -3,9 +3,16 @@ import React from 'react'
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpSchema } from '@utils/validation'
-import { Register, IRegisterParams, IRegisterForm, IRegisterResponse } from '@services/authentication';
+import { Register, IRegisterForm, IRegisterResponse } from '@services/authentication';
+import { toaster } from 'evergreen-ui';
+
+import { useDispatch } from 'react-redux'
+import { setAuthToken } from '@store/authentication'
+import {useNavigate } from 'react-router-dom'
 
 function SignIn() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm<IRegisterForm>({
     resolver: yupResolver(signUpSchema)
   });
@@ -16,17 +23,22 @@ function SignIn() {
 
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const onSubmit: SubmitHandler<IRegisterParams> = async (data) => {
+  const onSubmit: SubmitHandler<IRegisterForm> = async (data) => {
     setIsLoading(true)
     setFormData(data)
     const registerData = {
       email: data.email,
-      name: data.name,
+      fullName: data.name,
       password: data.password,
     }
     await Register(registerData)
       .then((response: IRegisterResponse) => {
-        console.log(response)
+        if (response.success) {
+          toaster.success('Usuário criado com sucesso', { duration: 3 })
+          const token = response.data.token
+          dispatch(setAuthToken(token))
+        }
+        navigate('/profile-form')
       })
       .finally(() => {
         setIsLoading(false)

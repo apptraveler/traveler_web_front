@@ -10,7 +10,7 @@ export interface IRegisterForm {
 }
 export interface IRegisterParams {
   email: string,
-  name: string,
+  fullName: string,
   password: string
 }
 export interface IRegisterResponse extends ICommonResponseType {
