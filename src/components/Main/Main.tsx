@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux'
 
 const Main = () => {
   const authToken = useSelector((state: any) => state.auth.token)
-  console.log('teste', authToken)
 
   return (
     <Routes>

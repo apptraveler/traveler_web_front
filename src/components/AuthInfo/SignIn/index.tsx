@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setAuthToken } from '@store/authentication'
 
 function SignIn() {
-  const authToken = useSelector((state: any) => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm<ILoginParams>({
