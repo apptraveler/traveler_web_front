@@ -1,4 +1,4 @@
-import { Pane, Pagination, Heading, Paragraph, DollarIcon, Button, HeartIcon, ListDetailViewIcon, TemperatureIcon, Tooltip, SideSheet } from 'evergreen-ui'
+import { Pane, Pagination, Paragraph, DollarIcon, Button, HeartIcon, ListDetailViewIcon, TemperatureIcon, Tooltip, SideSheet } from 'evergreen-ui'
 import StressImage from '@images/Stress.svg';
 import { useState } from 'react'
 import DestinyInfo from '@components/DestinyInfo';
