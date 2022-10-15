@@ -1,6 +1,7 @@
 import { Pane } from 'evergreen-ui'
 import ProfileSidesheet from '@components/ProfileSidesheet'
-import ContentSlideAnimation from '@animations/ContentSlide'
+import ContentSlideYAnimation from '@animations/ContentSlideY'
+import ContentSlideXAnimation from '@animations/ContentSlideX'
 
 interface IMainLayoutParams {
   top?: any,
@@ -10,18 +11,20 @@ interface IMainLayoutParams {
 function MainLayout(props: IMainLayoutParams) {
   return (
     <Pane height='100%' width='100%' padding='1rem'>
-        <Pane
-          marginBottom='2rem'
-          display='flex'
-          justifyContent='space-between'
-          alignItems='center'
-        >
-          <ProfileSidesheet></ProfileSidesheet>
-          {props.top}
-        </Pane>
-        <ContentSlideAnimation>
+        <ContentSlideXAnimation>
+          <Pane
+            marginBottom='2rem'
+            display='flex'
+            justifyContent='space-between'
+            alignItems='center'
+          >
+            <ProfileSidesheet></ProfileSidesheet>
+            {props.top}
+          </Pane>
+        </ContentSlideXAnimation>
+        <ContentSlideYAnimation>
           {props.main}
-        </ContentSlideAnimation>
+        </ContentSlideYAnimation>
     </Pane>
   )
 }

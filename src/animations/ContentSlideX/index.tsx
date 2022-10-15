@@ -2,11 +2,11 @@ import { Pane } from "evergreen-ui"
 import { useState } from "react"
 import { animated, useTransition } from "react-spring"
 
-interface ITabSwitcherAnimationParams {
+interface IContentSlideXAnimationParams {
   children: any
 }
 
-function TabSwitcherAnimation({children}: ITabSwitcherAnimationParams) {
+function ContentSlideXAnimation({children}: IContentSlideXAnimationParams) {
   const [translateXAmount] = useState('10%')
 
   const transitions = useTransition(children, {
@@ -37,4 +37,4 @@ function TabSwitcherAnimation({children}: ITabSwitcherAnimationParams) {
   )
 }
 
-export default TabSwitcherAnimation
+export default ContentSlideXAnimation

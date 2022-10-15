@@ -6,7 +6,7 @@ import SignUp from '@components/AuthInfo/SignUp'
 import ForgotPassword from './ForgotPassword'
 import BirdLogoImage from '@images/bird-logo.svg';
 
-import TabSwitcherAnimation from '@animations/TabSwitcher'
+import ContentSlideXAnimation from '@animations/ContentSlideX'
 import HeightSlideAnimation from '@animations/HeightSlide'
 
 interface AuthInfoProps {
@@ -42,10 +42,10 @@ function AuthInfo (props: AuthInfoProps) {
                 </Tab>
               ))}
             </Tablist>
-            <TabSwitcherAnimation>
+            <ContentSlideXAnimation>
               {selectedIndex === 0 && <SignIn />}
               {selectedIndex === 1 && <SignUp />}
-            </TabSwitcherAnimation>
+            </ContentSlideXAnimation>
           </>
         }
         {props.isForgotPasswordRoute &&

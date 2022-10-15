@@ -2,11 +2,11 @@ import { Pane } from "evergreen-ui"
 import { useState } from "react"
 import { animated, useTransition } from "react-spring"
 
-interface IContentSlideAnimationParams {
+interface IContentSlideYAnimationParams {
   children: any
 }
 
-function ContentSlideAnimation({children}: IContentSlideAnimationParams) {
+function ContentSlideYAnimation({children}: IContentSlideYAnimationParams) {
   const [translateXAmount] = useState('10%')
 
   const transitions = useTransition(children, {
@@ -37,4 +37,4 @@ function ContentSlideAnimation({children}: IContentSlideAnimationParams) {
   )
 }
 
-export default ContentSlideAnimation
+export default ContentSlideYAnimation
