@@ -2,15 +2,13 @@ import { Pane } from 'evergreen-ui'
 import ProfileSidesheet from '@components/ProfileSidesheet'
 import DashboardList from '@components/DashboardList'
 import DashboardTabs from '@components/DashboardTabs'
-import { useState } from 'react'
 
-function MainLayout(props: any) {
-  const [currentTab, setCurrentTab] = useState(0)
-  
-  function handleTabSelection (index: number) {
-    setCurrentTab(index)
-  }
+interface IMainLayoutParams {
+  top?: any,
+  main: any
+}
 
+function MainLayout(props: IMainLayoutParams) {
   return (
     <Pane height='100%' width='100%' padding='1rem'>
       <Pane
@@ -20,9 +18,9 @@ function MainLayout(props: any) {
         alignItems='center'
       >
         <ProfileSidesheet></ProfileSidesheet>
-        <DashboardTabs onSelectTab={handleTabSelection}></DashboardTabs>
+        {props.top}
       </Pane>
-      <DashboardList currentTab={currentTab}></DashboardList>
+      {props.main}
     </Pane>
   )
 }
