@@ -3,6 +3,7 @@
     "baseUrl": "./src",
     "paths": {
       "@pages/*" : ["./pages/*"],
+      "@animations/*" : ["./animations/*"],
       "@layouts/*" : ["./layouts/*"],
       "@components/*" : ["./components/*"],
       "@routeGuard/*" : ["./routeGuard/*"],

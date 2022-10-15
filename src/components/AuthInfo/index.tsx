@@ -6,6 +6,8 @@ import SignUp from '@components/AuthInfo/SignUp'
 import ForgotPassword from './ForgotPassword'
 import BirdLogoImage from '@images/bird-logo.svg';
 
+import TabSwitcherAnimation from '@animations/TabSwitcher'
+
 interface AuthInfoProps {
   title?: string
   description?: string
@@ -38,20 +40,10 @@ function AuthInfo (props: AuthInfoProps) {
               </Tab>
             ))}
           </Tablist>
-          {tabs.map((tab, index) => (
-            <Pane
-              className={classes['tab-pane']}
-              key={tab}
-              id={`panel-${tab}`}
-              role="tabpanel"
-              aria-labelledby={tab}
-              aria-hidden={index !== selectedIndex}
-              display={index === selectedIndex ? 'block' : 'none'}
-            >
-              {index === 0 && <SignIn />}
-              {index === 1 && <SignUp />}
-            </Pane>
-          ))}
+          <TabSwitcherAnimation>
+            {selectedIndex === 0 && <SignIn />}
+            {selectedIndex === 1 && <SignUp />}
+          </TabSwitcherAnimation>
         </>
       }
       {props.isForgotPasswordRoute &&
