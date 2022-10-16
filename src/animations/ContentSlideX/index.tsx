@@ -20,7 +20,7 @@ function ContentSlideXAnimation({children, duration}: IContentSlideXAnimationPar
       opacity: 0
     },
     enter: {
-      transform: "translateX(0); translate",
+      transform: "translateX(0)",
       display: "block",
       opacity: 1,
     },
