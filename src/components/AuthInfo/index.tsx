@@ -26,8 +26,8 @@ function AuthInfo (props: AuthInfoProps) {
         <img className={classes.logo} src={BirdLogoImage} alt="bird-logo" />
         {props.description && <h2 className={classes.description}>{props.description}</h2>}
         {!props.isForgotPasswordRoute &&
-          <>
-            <Tablist marginBottom={16}>
+          <Pane width='100%' textAlign='initial'>
+            <Tablist marginBottom={16} textAlign='center'>
               {tabs.map((tab, index) => (
                 <Tab
                   key={tab}
@@ -46,7 +46,7 @@ function AuthInfo (props: AuthInfoProps) {
               {selectedIndex === 0 && <SignIn />}
               {selectedIndex === 1 && <SignUp />}
             </ContentSlideXAnimation>
-          </>
+          </Pane>
         }
         {props.isForgotPasswordRoute &&
           <Pane

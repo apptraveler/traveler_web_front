@@ -3,6 +3,7 @@ import StressImage from '@images/Stress.svg';
 import { useState } from 'react'
 import DestinyInfo from '@components/DestinyInfo';
 import classes from './index.module.scss'
+import ContentSlideXAnimation from '@animations/ContentSlideX';
 
 interface IDashboardTabsProps {
   onSelectTab: (index: number) => void
@@ -18,20 +19,23 @@ function DashboardTabs (props: IDashboardTabsProps) {
   }
 
   return (
-    <Tablist>
-      {tabs.map((tab, index) => (
-        <Tab
-          appearance='primary'
-          key={tab}
-          id={tab}
-          onSelect={() => setCurrentTab(index)}
-          isSelected={index === selectedIndex}
-          aria-controls={`panel-${tab}`}
-          fontSize='15px'
-        >
-          {tab}
-        </Tab>
-      ))}
+    <Tablist display='flex' width='80%' justifyContent='end'>
+      <ContentSlideXAnimation>
+        {tabs.map((tab, index) => (
+          <Tab
+            marginRight='10px'
+            appearance='primary'
+            key={tab}
+            id={tab}
+            onSelect={() => setCurrentTab(index)}
+            isSelected={index === selectedIndex}
+            aria-controls={`panel-${tab}`}
+            fontSize='15px'
+          >
+            {tab}
+          </Tab>
+        ))}
+      </ContentSlideXAnimation>
     </Tablist>
   )
 }

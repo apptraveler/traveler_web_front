@@ -19,7 +19,6 @@ function ContentSlideXAnimation({children}: IContentSlideXAnimationParams) {
       transform: "translateX(0); translate",
       display: "block",
       opacity: 1,
-      width: "100%"
     },
     leave: {
       transform: `translateX(${translateXAmount})`,
@@ -30,7 +29,7 @@ function ContentSlideXAnimation({children}: IContentSlideXAnimationParams) {
 
   return (
     transitions((style, item) => (
-      <Pane textAlign='initial' width={'100%'}>
+      <Pane>
         <animated.div style={style}>{item}</animated.div>
       </Pane>
     ))  
