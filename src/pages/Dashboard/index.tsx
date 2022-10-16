@@ -10,7 +10,7 @@ const Dashboard = (props: any) => {
     setCurrentTab(index)
   }
   
-  return (      
+  return (
     <MainLayout
       top={<DashboardTabs onSelectTab={handleTabSelection}/>}
       main={<DashboardList currentTab={currentTab}/>}

@@ -1,13 +1,16 @@
-import { Pane } from "evergreen-ui"
-import { useState } from "react"
 import { animated, useSpring } from "react-spring"
 
 interface IHeightSlideAnimationParams {
-  children: any
+  children: any,
+  duration: number
 }
 
-function HeightSlideAnimation({children}: IHeightSlideAnimationParams) {
-  const heightSpring = useSpring({ to: { height: '0px' }, from: { height: '100%' } })
+function HeightSlideAnimation({children, duration}: IHeightSlideAnimationParams) {
+  const heightSpring = useSpring({
+    config: {duration: duration},
+    to: { opacity: 1, height: '0px' },
+    from: { opacity: 0, height: '100%' }
+  })
 
   return (
     <animated.div style={heightSpring}>{children}</animated.div>

@@ -3,13 +3,17 @@ import { useState } from "react"
 import { animated, useTransition } from "react-spring"
 
 interface IContentSlideXAnimationParams {
-  children: any
+  children: any,
+  duration: number
 }
 
-function ContentSlideXAnimation({children}: IContentSlideXAnimationParams) {
+function ContentSlideXAnimation({children, duration}: IContentSlideXAnimationParams) {
   const [translateXAmount] = useState('10%')
 
   const transitions = useTransition(children, {
+    config: {
+      duration: duration
+    },
     from: {
       transform: `translateX(${translateXAmount})`,
       display: "none",

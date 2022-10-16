@@ -20,7 +20,7 @@ function AuthInfo (props: AuthInfoProps) {
   const [tabs] = React.useState(['Login', 'Cadastre-se'])
 
   return (
-    <HeightSlideAnimation>
+    <HeightSlideAnimation duration={250}>
       <Pane elevation={4} className={classes.card}>
         {props.title && <h1 className={classes.title}>{props.title}</h1>}
         <img className={classes.logo} src={BirdLogoImage} alt="bird-logo" />
@@ -42,7 +42,7 @@ function AuthInfo (props: AuthInfoProps) {
                 </Tab>
               ))}
             </Tablist>
-            <ContentSlideXAnimation>
+            <ContentSlideXAnimation duration={250}>
               {selectedIndex === 0 && <SignIn />}
               {selectedIndex === 1 && <SignUp />}
             </ContentSlideXAnimation>
