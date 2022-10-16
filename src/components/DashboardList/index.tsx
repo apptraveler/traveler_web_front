@@ -3,7 +3,7 @@ import StressImage from '@images/Stress.svg';
 import { useState } from 'react'
 import DestinyInfo from '@components/DestinyInfo';
 import classes from './index.module.scss'
-import ContentSlideYAnimation from '@animations/ContentSlideY';
+import ButtonScaleAnimation from '@animations/ButtonScale';
 
 interface IDashboardListProps {
   currentTab: number
@@ -58,12 +58,14 @@ function DashboardList (props: IDashboardListProps) {
           >
             Cancún
             <Tooltip content={isFavDestiny ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}>
-              <HeartIcon
-                onClick={toggleFav}
-                cursor='pointer'
-                color={isFavDestiny ? 'red' : 'muted'}
-                size={30}
-              />
+              <ButtonScaleAnimation>
+                <HeartIcon
+                  onClick={toggleFav}
+                  cursor='pointer'
+                  color={isFavDestiny ? 'red' : 'muted'}
+                  size={30}
+                />
+              </ButtonScaleAnimation>
             </Tooltip>
           </Pane>
           <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi delectus quibusdam reprehenderit quisquam animi, quidem officiis velit dolorum architecto voluptatem maiores deserunt ea laboriosam dolorem nam aliquam voluptas rem consectetur.</Paragraph>
