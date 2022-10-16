@@ -6,7 +6,6 @@ import classes from './index.module.scss'
 
 import { useDispatch } from 'react-redux'
 import { setAuthToken } from '@store/authentication'
-import ContentSlideYAnimation from '@animations/ContentSlideY';
 
 function ProfileSidesheet () {
   const dispatch = useDispatch()
@@ -87,9 +86,7 @@ function ProfileSidesheet () {
           </Pane>
         </Pane>
       </SideSheet>
-      <ContentSlideYAnimation duration={500}>
-        <Button size="large" appearance='primary' iconAfter={UserIcon} onClick={() => setIsShown(true)}>Ver Perfil</Button>
-      </ContentSlideYAnimation>
+      <Button size="large" appearance='primary' iconAfter={UserIcon} onClick={() => setIsShown(true)}>Ver Perfil</Button>
     </>
   )
 }

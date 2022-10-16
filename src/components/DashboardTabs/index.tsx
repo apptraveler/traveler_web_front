@@ -20,7 +20,7 @@ function DashboardTabs (props: IDashboardTabsProps) {
 
   return (
     <Tablist display='flex' width='80%' justifyContent='end'>
-      <ContentSlideXAnimation duration={250}>
+      <ContentSlideXAnimation duration={500}>
         {tabs.map((tab, index) => (
           <Tab
             marginRight='10px'

@@ -16,7 +16,7 @@ function MainLayout(props: IMainLayoutParams) {
         justifyContent='space-between'
         alignItems='center'
       >
-        <ProfileSidesheet></ProfileSidesheet>
+        <ProfileSidesheet />
         {props.top}
       </Pane>
       {props.main}

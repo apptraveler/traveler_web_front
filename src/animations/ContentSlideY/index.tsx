@@ -8,25 +8,25 @@ interface IContentSlideYAnimationParams {
 }
 
 function ContentSlideYAnimation({children, duration}: IContentSlideYAnimationParams) {
-  const [translateXAmount] = useState('10%')
+  const [translateYAmount] = useState('10%')
 
   const transitions = useTransition(children, {
     config: {
       duration: duration
     },
     from: {
-      transform: `translateY(${translateXAmount})`,
+      transform: `translateY(${translateYAmount})`,
       display: "none",
       opacity: 0
     },
     enter: {
-      transform: "translateY(0); translate",
+      transform: "translateY(0)",
       display: "block",
       opacity: 1,
       width: "100%"
     },
     leave: {
-      transform: `translateY(${translateXAmount})`,
+      transform: `translateY(${translateYAmount})`,
       display: "none",
       opacity: 0
     }
@@ -34,7 +34,7 @@ function ContentSlideYAnimation({children, duration}: IContentSlideYAnimationPar
 
   return (
     transitions((style, item) => (
-      <Pane textAlign='initial' width={'100%'}>
+      <Pane>
         <animated.div style={style}>{item}</animated.div>
       </Pane>
     ))  

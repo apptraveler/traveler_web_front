@@ -1,31 +1,25 @@
 import { Pane } from "evergreen-ui"
-import { useState } from "react"
 import { animated, useTransition } from "react-spring"
 
-interface IContentSlideXAnimationParams {
+interface IFadeAnimationParams {
   children: any,
   duration: number
 }
 
-function ContentSlideXAnimation({children, duration}: IContentSlideXAnimationParams) {
-  const [translateXAmount] = useState('20%')
-
+function FadeAnimation({children, duration}: IFadeAnimationParams) {
   const transitions = useTransition(children, {
     config: {
       duration: duration
     },
     from: {
-      transform: `translateX(${translateXAmount})`,
       display: "none",
       opacity: 0
     },
     enter: {
-      transform: "translateX(0)",
       display: "block",
       opacity: 1,
     },
     leave: {
-      transform: `translateX(${translateXAmount})`,
       display: "none",
       opacity: 0
     }
@@ -40,4 +34,4 @@ function ContentSlideXAnimation({children, duration}: IContentSlideXAnimationPar
   )
 }
 
-export default ContentSlideXAnimation
+export default FadeAnimation
