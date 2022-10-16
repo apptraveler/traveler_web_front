@@ -3,6 +3,7 @@ import StressImage from '@images/Stress.svg';
 import { useState } from 'react'
 import DestinyInfo from '@components/DestinyInfo';
 import classes from './index.module.scss'
+import ContentSlideYAnimation from '@animations/ContentSlideY';
 
 interface IDashboardListProps {
   currentTab: number
@@ -21,93 +22,95 @@ function DashboardList (props: IDashboardListProps) {
   }
 
   return (
-    <Pane
-      backgroundColor='white'
-      display='flex'
-      flexDirection='row'
-      justifyContent='center'
-      alignItems='center'
-      borderRadius='30px'
-      marginBottom='1rem'
-      padding='1rem'
-      gap='1rem'
-      elevation={3}
-      className={classes['dashboard-card']}
-    >
+    <ContentSlideYAnimation duration={250}>
       <Pane
         backgroundColor='white'
         display='flex'
+        flexDirection='row'
+        justifyContent='center'
         alignItems='center'
-        flexDirection='column'
+        borderRadius='30px'
+        marginBottom='1rem'
+        padding='1rem'
+        gap='1rem'
+        elevation={3}
+        className={classes['dashboard-card']}
       >
-        <img src={StressImage} alt="Destino imagem" width='100%'/>
-        <Pagination page={1} totalPages={5}></Pagination>
-      </Pane>
-      <Pane
-        backgroundColor='white'
-        display='flex'
-        flexDirection='column'
-      >
-        <Pane marginBottom='1rem'>
-          <Pane
+        <Pane
+          backgroundColor='white'
+          display='flex'
+          alignItems='center'
+          flexDirection='column'
+        >
+          <img src={StressImage} alt="Destino imagem" width='100%'/>
+          <Pagination page={1} totalPages={5}></Pagination>
+        </Pane>
+        <Pane
+          backgroundColor='white'
+          display='flex'
+          flexDirection='column'
+        >
+          <Pane marginBottom='1rem'>
+            <Pane
+              display='flex'
+              justifyContent='space-between'
+              alignItems='center'
+              marginBottom='1rem'
+            >
+              Cancún
+              <Tooltip content={isFavDestiny ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}>
+                <HeartIcon
+                  onClick={toggleFav}
+                  cursor='pointer'
+                  color={isFavDestiny ? 'red' : 'muted'}
+                  size={30}
+                />
+              </Tooltip>
+            </Pane>
+            <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi delectus quibusdam reprehenderit quisquam animi, quidem officiis velit dolorum architecto voluptatem maiores deserunt ea laboriosam dolorem nam aliquam voluptas rem consectetur.</Paragraph>
+          </Pane>
+          <Pane 
+            width='100%'
             display='flex'
             justifyContent='space-between'
+            textAlign='end'
+            alignSelf='end'
             alignItems='center'
             marginBottom='1rem'
           >
-            Cancún
-            <Tooltip content={isFavDestiny ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}>
-              <HeartIcon
-                onClick={toggleFav}
-                cursor='pointer'
-                color={isFavDestiny ? 'red' : 'muted'}
-                size={30}
-              />
+            <Pane>
+              <DollarIcon size={20} color="success"/>
+              <DollarIcon size={20} color="success"/>
+              <DollarIcon size={20} color="success"/>
+              <DollarIcon size={20} color="muted"/>
+              <DollarIcon size={20} color="muted"/>
+            </Pane>
+            <Tooltip content='Clique para verificar a temperatura atual'>
+              <Button
+                onClick={() => redirectToWeatherInfo()}
+                color='blue' 
+                appearance='minimal'
+                iconAfter={TemperatureIcon}
+                size='large'
+              >
+                Atualmente frio
+              </Button>
             </Tooltip>
           </Pane>
-          <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi delectus quibusdam reprehenderit quisquam animi, quidem officiis velit dolorum architecto voluptatem maiores deserunt ea laboriosam dolorem nam aliquam voluptas rem consectetur.</Paragraph>
+          <Button
+            onClick={() => setIsShown(true)}
+            color='blue'
+            iconAfter={ListDetailViewIcon}
+            size='large'
+          >
+            Visualização rápida
+          </Button>
         </Pane>
-        <Pane 
-          width='100%'
-          display='flex'
-          justifyContent='space-between'
-          textAlign='end'
-          alignSelf='end'
-          alignItems='center'
-          marginBottom='1rem'
-        >
-          <Pane>
-            <DollarIcon size={20} color="success"/>
-            <DollarIcon size={20} color="success"/>
-            <DollarIcon size={20} color="success"/>
-            <DollarIcon size={20} color="muted"/>
-            <DollarIcon size={20} color="muted"/>
-          </Pane>
-          <Tooltip content='Clique para verificar a temperatura atual'>
-            <Button
-              onClick={() => redirectToWeatherInfo()}
-              color='blue' 
-              appearance='minimal'
-              iconAfter={TemperatureIcon}
-              size='large'
-            >
-              Atualmente frio
-            </Button>
-          </Tooltip>
-        </Pane>
-        <Button
-          onClick={() => setIsShown(true)}
-          color='blue'
-          iconAfter={ListDetailViewIcon}
-          size='large'
-        >
-          Visualização rápida
-        </Button>
+        <SideSheet position='top' isShown={isShown} onCloseComplete={() => setIsShown(false)}>
+          <DestinyInfo/>
+        </SideSheet>
       </Pane>
-      <SideSheet position='top' isShown={isShown} onCloseComplete={() => setIsShown(false)}>
-        <DestinyInfo/>
-      </SideSheet>
-    </Pane>
+    </ContentSlideYAnimation>
   )
 }
 
