@@ -1,5 +1,5 @@
 import MainLayout from '@layouts/MainLayout';
-import DashboardList from '@components/DashboardList';
+import DashboardCard from '@components/DashboardCard';
 import DashboardTabs from '@components/DashboardTabs';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ const Dashboard = (props: any) => {
   return (
     <MainLayout
       top={<DashboardTabs onSelectTab={handleTabSelection}/>}
-      main={<DashboardList currentTab={currentTab}/>}
+      main={<DashboardCard currentTab={currentTab}/>}
     />
   )
 }

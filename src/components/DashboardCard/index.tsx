@@ -6,11 +6,11 @@ import classes from './index.module.scss'
 import ButtonScaleAnimation from '@animations/ButtonScale';
 import ContentSlideYAnimation from '@animations/ContentSlideY';
 
-interface IDashboardListProps {
+interface IDashboardCardProps {
   currentTab: number
 }
 
-function DashboardList (props: IDashboardListProps) {
+function DashboardCard (props: IDashboardCardProps) {
   const [isShown, setIsShown] = useState(false)
   const [isFavDestiny, setIsFavDestiny] = useState(false)
 
@@ -117,4 +117,4 @@ function DashboardList (props: IDashboardListProps) {
   )
 }
 
-export default DashboardList
+export default DashboardCard
