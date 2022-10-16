@@ -42,7 +42,7 @@ function AuthInfo (props: AuthInfoProps) {
                 </Tab>
               ))}
             </Tablist>
-            <ContentSlideXAnimation duration={250}>
+            <ContentSlideXAnimation>
               {selectedIndex === 0 && <SignIn />}
               {selectedIndex === 1 && <SignUp />}
             </ContentSlideXAnimation>
