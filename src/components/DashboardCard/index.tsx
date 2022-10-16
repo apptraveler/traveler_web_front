@@ -23,7 +23,7 @@ function DashboardCard (props: IDashboardCardProps) {
   }
 
   return (
-    <ContentSlideYAnimation duration={250}>
+    <ContentSlideYAnimation>
       <Pane
         backgroundColor='white'
         display='flex'

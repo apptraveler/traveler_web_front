@@ -1,13 +1,13 @@
-import { animated, useSpring } from "react-spring"
+
+import { config, animated, useSpring } from "react-spring"
 
 interface IHeightSlideAnimationParams {
-  children: any,
-  duration: number
+  children: any
 }
 
-function HeightSlideAnimation({children, duration}: IHeightSlideAnimationParams) {
+function HeightSlideAnimation({children}: IHeightSlideAnimationParams) {
   const heightSpring = useSpring({
-    config: {duration: duration},
+    config: config.molasses,
     to: { opacity: 1, height: '0px' },
     from: { opacity: 0, height: '100%' }
   })
