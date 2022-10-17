@@ -4,6 +4,7 @@
     "paths": {
       "@pages/*" : ["./pages/*"],
       "@animations/*" : ["./animations/*"],
+      "@hooks/*" : ["./hooks/*"],
       "@layouts/*" : ["./layouts/*"],
       "@components/*" : ["./components/*"],
       "@routeGuard/*" : ["./routeGuard/*"],
