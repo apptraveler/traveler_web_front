@@ -1,7 +1,6 @@
 import classes from './index.module.scss'
-import GlobalLogisticsImage from '@images/Global-logistics-delivery-network.svg';
 import formStepsJSON from './formSteps'
-import { Checkbox, Heading, Pane, Button, toaster } from 'evergreen-ui'
+import { Heading, Pane, Button, toaster } from 'evergreen-ui'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 

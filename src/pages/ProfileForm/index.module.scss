@@ -45,14 +45,6 @@
       line-height: 1.5;
       border: 1px solid $color-shadow-fade;
     }
-
-    > .checkbox {
-      span {
-        font-weight: bold;
-        font-size: 15px;
-        line-height: 17px;
-      }
-    }
   }
 
   @media screen and (max-width: 750px) {
