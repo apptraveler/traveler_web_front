@@ -35,12 +35,12 @@
     margin-bottom: 1rem;
     width: 100%;
     min-height: 80px;
-    cursor: pointer;
 
     > .button {
       height: 100%;
       white-space: normal;
       font-weight: bold;
+      min-height: 50px;
       font-size: 15px;
       line-height: 1.5;
       border: 1px solid $color-shadow-fade;
