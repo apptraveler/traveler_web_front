@@ -1,21 +1,25 @@
 import { Pane, Pagination, Paragraph, DollarIcon, Button, HeartIcon, ListDetailViewIcon, TemperatureIcon, Tooltip, SideSheet } from 'evergreen-ui'
 import StressImage from '@images/Stress.svg';
 import { useState } from 'react'
-import DestinyInfo from '@components/DestinyInfo';
 import classes from './index.module.scss'
 import ButtonScaleAnimation from '@animations/ButtonScale';
 import ContentSlideYAnimation from '@animations/ContentSlideY';
+import { useNavigate } from 'react-router-dom';
 
 interface IDashboardCardProps {
   currentTab: number
 }
 
 function DashboardCard (props: IDashboardCardProps) {
-  const [isShown, setIsShown] = useState(false)
   const [isFavDestiny, setIsFavDestiny] = useState(false)
+  const navigate = useNavigate()
 
   function redirectToWeatherInfo() {
     window.open('https://weather.com/pt-BR/clima/hoje/l/da2be3197b9161d9455d2682c6f8adbef50e47eee836468d3333deb460c3c4dc', '_blank');
+  }
+
+  function redirectToDestinyDetail() {
+    navigate('/destiny-detail')
   }
 
   function toggleFav() {
@@ -101,17 +105,14 @@ function DashboardCard (props: IDashboardCardProps) {
             </Tooltip>
           </Pane>
           <Button
-            onClick={() => setIsShown(true)}
+            onClick={() => redirectToDestinyDetail()}
             color='blue'
             iconAfter={ListDetailViewIcon}
             size='large'
           >
-            Visualização rápida
+            Visualização detalhada
           </Button>
         </Pane>
-        <SideSheet position='top' isShown={isShown} onCloseComplete={() => setIsShown(false)}>
-          <DestinyInfo/>
-        </SideSheet>
       </Pane>
     </ContentSlideYAnimation>
   )
