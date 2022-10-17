@@ -35,7 +35,13 @@ const ProfileForm = () => {
       : true
   }
 
-  function handleClickAnswer(value: any) {
+  function handleClickAnswer(value: any, isMultiple: boolean) {
+    isMultiple
+      ? checkAnswer(value)
+      : clickAnswer(value)
+  }
+
+  function clickAnswer(value: any) {
     if (formResponse[`step-${currentStep}`]?.indexOf(value) > -1) {
       setFormResponse({
         ...formResponse,
@@ -49,7 +55,7 @@ const ProfileForm = () => {
     }
   }
 
-  function handleCheckAnswer(value: string) {
+  function checkAnswer(value: string) {
     if (formResponse[`step-${currentStep}`]?.indexOf(value) > -1) {
       setFormResponse({
         ...formResponse,
@@ -98,20 +104,29 @@ const ProfileForm = () => {
   }
 
   return (
-    <Pane className={classes['profile-form-page']}>
-      <form className={classes['form-container']}>
-        <Heading className={classes['heading']} fontSize="25px">{currentQuestion.label}</Heading>
+    <Pane
+      display='flex'
+      flexDirection='column'
+      justifyContent='center'
+      alignItems='center'
+      height='100%'
+    >
+      <Pane elevation={3} className={classes['form-container']}>
+        <Heading className={classes['heading']}>{currentQuestion.label}</Heading>
         <Pane className={classes['content-container']}>
           {currentAnswers.map((answer, index) => (
             <Pane key={answer.label} className={classes['content']}>
               {isCurrentStepMultipleAnswer ? (
-                <Checkbox
-                  className={classes['checkbox']}
-                  label={answer.label}
-                  value={String(answer.value)}
-                  checked={formResponse[`step-${currentStep}`]?.indexOf(String(answer.value)) > -1}
-                  onChange={e => handleCheckAnswer(e.target.value)}
-                />
+                <Button
+                  className={classes['button']}
+                  type='button'
+                  value={answer.value}
+                  appearance={formResponse[`step-${currentStep}`]?.indexOf(String(answer.value)) > -1 ? 'primary' : 'default'}
+                  size='large'
+                  onClick={(e: any) => handleClickAnswer(e.target.value, true)}
+                >
+                  {answer.label}
+                </Button>
               ) : (
                 <Button
                   className={classes['button']}
@@ -119,7 +134,7 @@ const ProfileForm = () => {
                   value={answer.value}
                   appearance={formResponse[`step-${currentStep}`]?.indexOf(String(answer.value)) > -1 ? 'primary' : 'default'}
                   size='large'
-                  onClick={(e: any) => handleClickAnswer(e.target.value)}
+                  onClick={(e: any) => handleClickAnswer(e.target.value, false)}
                 >
                   {answer.label}
                 </Button>
@@ -127,7 +142,10 @@ const ProfileForm = () => {
             </Pane>
           ))}
         </Pane>
-        <Pane className={classes['content-actions']}>
+        <Pane
+          className={classes['content-actions']}
+          marginTop='1rem'
+        >
           {!limitBackNavigation && 
             <Button
               size='large'
@@ -150,8 +168,7 @@ const ProfileForm = () => {
             {!limitForwardNavigation ? 'Avançar' : 'Concluir'} 
           </Button>
         </Pane>
-      </form>
-      <img src={GlobalLogisticsImage} alt="Logística global" className={classes.image}/>
+      </Pane>
     </Pane>
   )
 }
