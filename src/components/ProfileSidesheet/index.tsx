@@ -1,4 +1,4 @@
-import { Pane, Avatar, SideSheet, Button, Paragraph, UserIcon, Badge, Heading } from 'evergreen-ui'
+import { Pane, Avatar, SideSheet, Button, Paragraph, UserIcon, Badge, Heading, MenuClosedIcon } from 'evergreen-ui'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import PhotographerImage from '@images/profiles/photographer.svg';
@@ -6,6 +6,7 @@ import classes from './index.module.scss'
 
 import { useDispatch } from 'react-redux'
 import { setAuthToken } from '@store/authentication'
+import { useIsMobile } from '@hooks/dynamicStyle';
 
 function ProfileSidesheet () {
   const dispatch = useDispatch()
@@ -22,15 +23,40 @@ function ProfileSidesheet () {
 
   return (
     <>
-      <SideSheet position='left' isShown={isShown} onCloseComplete={() => setIsShown(false)}>
-        <Pane padding='1rem'>
+      <SideSheet
+        position='left'
+        isShown={isShown}
+        onCloseComplete={() => setIsShown(false)}
+        width={useIsMobile() ? '100%': '650px'}
+      >
+        <Pane
+          height='100%'
+          padding='2rem'
+          display='flex'
+          flexDirection='column'
+          justifyContent='space-around'
+        >
+          {useIsMobile() &&
+            <Pane
+              textAlign='end'
+            >
+              <Button
+                textAlign='end'
+                marginY={8}
+                intent='danger'
+                marginRight={12}
+                iconAfter={MenuClosedIcon}
+                onClick={() => setIsShown(false)}
+              >
+                Close
+              </Button>
+            </Pane>
+          }
           <Pane
             display='flex'
             flexDirection='column' 
             justifyContent='center'
             alignItems='center'
-            marginTop='2rem'
-            marginBottom='2rem'
           >
             <Avatar
               name="Igor Duarte"
@@ -47,8 +73,6 @@ function ProfileSidesheet () {
             display='flex'
             flexDirection='column' 
             justifyContent='center'
-            marginTop='2rem'
-            marginBottom='2rem'
           >
             <Heading fontSize='18px' marginBottom='1rem'>Mais sobre seu Perfil</Heading>
             <Paragraph marginBottom='1rem' size='large'>O perfil de fótografo gosta de tirar fotos de tudo que vê pela frente, registrar os momentos é o que é importante, detalhes pra você são a chave.</Paragraph>
@@ -58,8 +82,6 @@ function ProfileSidesheet () {
             display='flex'
             flexDirection='column' 
             justifyContent='center'
-            marginTop='2rem'
-            marginBottom='2rem'
           >
             <Paragraph
               size='large'
@@ -79,6 +101,7 @@ function ProfileSidesheet () {
             <Button
               size='medium'
               intent='danger'
+              appearance='primary'
               onClick={() => logout()}
             >
               Sair
