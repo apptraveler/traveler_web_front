@@ -1,6 +1,6 @@
 import AxiosInstance, { ICommonResponseType } from '@services/config'
 
-const defaultPath = 'traveler/Traveler/v1'
+const defaultPath = 'traveler/v1'
 
 export interface IPutProfileInfoParams {
   profileId: string,
@@ -8,12 +8,16 @@ export interface IPutProfileInfoParams {
   locationTagsIds: [string]
 }
 export interface IPutProfileInfoResponse extends ICommonResponseType {
-  data: {
-    token: string
-  },
+  profileId: 'string',
+  averageSpendId: 'string',
+  locationTagsIds: Array<string>
 }
-export const PutProfileInfo = (userData: IPutProfileInfoParams): any => {
-  return AxiosInstance.put(`${defaultPath}/profile`, userData)
+export const PutProfileInfo = (userData: IPutProfileInfoParams, token: string): any => {
+  return AxiosInstance.put(`${defaultPath}/profile`, userData, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
     .then((response) => {
       return response.data
     })

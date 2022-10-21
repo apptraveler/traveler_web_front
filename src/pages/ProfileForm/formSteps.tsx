@@ -7,23 +7,23 @@ const formSteps = [
     answer: [
       {
         label: "Montanhas",
-        value: 0
-      },
-      {
-        label: "Praias",
         value: 1
       },
       {
-        label: "Trilhas",
+        label: "Praias",
         value: 2
       },
       {
-        label: "Cachoeira",
+        label: "Trilhas",
         value: 3
       },
       {
-        label: "Lugares Históricos",
+        label: "Cachoeira",
         value: 4
+      },
+      {
+        label: "Lugares Históricos",
+        value: 5
       },
       {
         label: "Pontos Turísticos",
@@ -38,15 +38,11 @@ const formSteps = [
     },
     answer: [
       {
-        label: "Procuro absorver ao máximo a cultura do destino, incluindo sua culinária e história! Aprender uma nova perspectiva de vida é sempre interessante.",
-        value: 0
-      },
-      {
-        label: "Sempre me preocupo com o custo benefício da viagem, pagar menos e aproveitar mais é meu foco!",
+        label:  "Escolho destinos com base na oportunidade e no meu momento, não interessa qual, apenas o que vai me proporcionar.",
         value: 1
       },
       {
-        label:  "Escolho destinos com base na oportunidade e no meu momento, não interessa qual, apenas o que vai me proporcionar.",
+        label: "Procuro absorver ao máximo a cultura do destino, incluindo sua culinária e história! Aprender uma nova perspectiva de vida é sempre interessante.",
         value: 2
       },
       {
@@ -54,12 +50,16 @@ const formSteps = [
         value: 3
       },
       {
-        label: "Procuro evoluir como pessoa a cada viagem, aprender mais e encontrar um novo propósito de vida.",
+        label: "Sempre me preocupo com o custo benefício da viagem, pagar menos e aproveitar mais é meu foco!",
         value: 4
       },
       {
-        label: "Quero conhecer pessoas interessantes, ouvir histórias de vida diferentes e me socializar com a população local.",
+        label: "Procuro evoluir como pessoa a cada viagem, aprender mais e encontrar um novo propósito de vida.",
         value: 5
+      },
+      {
+        label: "Quero conhecer pessoas interessantes, ouvir histórias de vida diferentes e me socializar com a população local.",
+        value: 6
       },
     ]
   },
@@ -71,15 +71,15 @@ const formSteps = [
     answer: [
       {
         label: "Pretendo gastar pouco",
-        value: 0
-      },
-      {
-        label: "Quero um equilibrio entre custo e benefício",
         value: 1
       },
       {
-        label: "Não me preocupo com o quanto irei gastar",
+        label: "Quero um equilibrio entre custo e benefício",
         value: 2
+      },
+      {
+        label: "Não me preocupo com o quanto irei gastar",
+        value: 3
       },
     ]
   }
