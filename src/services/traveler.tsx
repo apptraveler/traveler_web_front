@@ -42,8 +42,12 @@ export interface IGetProfileInfoResponse extends ICommonResponseType {
     ]
   }
 }
-export const getProfileInfo = (): any => {
-  return AxiosInstance.put(`${defaultPath}/information`)
+export const getProfileInfo = (token: string): any => {
+  return AxiosInstance.get(`${defaultPath}/information`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
     .then((response) => {
       return response.data
     })

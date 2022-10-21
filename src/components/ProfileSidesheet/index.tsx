@@ -1,17 +1,24 @@
 import { Pane, Avatar, SideSheet, Button, Paragraph, UserIcon, Badge, Heading, MenuClosedIcon } from 'evergreen-ui'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import PhotographerImage from '@images/profiles/photographer.svg';
-import classes from './index.module.scss'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAuthToken } from '@store/authentication'
 import { useIsMobile } from '@hooks/dynamicStyle';
+import { getProfileInfo } from '@services/traveler';
+import ProfilePhoto from '@components/ProfilePhoto';
 
 function ProfileSidesheet () {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [isShown, setIsShown] = useState(false)
+  const [fullName, setFullName] = useState('')
+  const [profileInfo, setProfileInfo] = useState({
+    id: '',
+    name: '',
+    description: ''
+  })
+  const authToken = useSelector((state: any) => state.auth.token)
 
   function redirectToProfileForm() {
     navigate('/profile-form')
@@ -20,6 +27,26 @@ function ProfileSidesheet () {
   function logout() {
     dispatch(setAuthToken(''))
   }
+
+
+  function setProfileType() {
+    getProfileInfo(authToken)
+      .then((response: any) => {
+        if (response.success) {
+          console.log(response)
+          setFullName(response.data.fullName)
+          setProfileInfo({
+            id: response.data.profile.id,
+            name: response.data.profile.name,
+            description: 'teste'
+          })
+        }
+      })
+  }
+
+  useEffect(() => {
+    setProfileType()
+  }, [])
 
   return (
     <>
@@ -64,9 +91,9 @@ function ProfileSidesheet () {
               marginBottom='1rem'
               color="blue"
             />
-            <Paragraph marginBottom='1rem' size='large'>Igor Duarte</Paragraph>
+            <Paragraph marginBottom='1rem' size='large'>{fullName}</Paragraph>
             <Badge color="blue">
-              Fotógrafo
+              { profileInfo.name }
             </Badge>
           </Pane>
           <Pane
@@ -76,7 +103,7 @@ function ProfileSidesheet () {
           >
             <Heading fontSize='18px' marginBottom='1rem'>Mais sobre seu Perfil</Heading>
             <Paragraph marginBottom='1rem' size='large'>O perfil de fótografo gosta de tirar fotos de tudo que vê pela frente, registrar os momentos é o que é importante, detalhes pra você são a chave.</Paragraph>
-            <img className={classes.image} src={PhotographerImage} alt="aboutphoto" />
+            <ProfilePhoto profileId={profileInfo.id}/>
           </Pane>
           <Pane
             display='flex'
