@@ -7,11 +7,7 @@ export interface IPutProfileInfoParams {
   averageSpendId: string,
   locationTagsIds: [string]
 }
-export interface IPutProfileInfoResponse extends ICommonResponseType {
-  profileId: 'string',
-  averageSpendId: 'string',
-  locationTagsIds: Array<string>
-}
+
 export const PutProfileInfo = (userData: IPutProfileInfoParams, token: string): any => {
   return AxiosInstance.put(`${defaultPath}/profile`, userData, {
     headers: {

@@ -4,7 +4,7 @@ import { Heading, Pane, Button, toaster } from 'evergreen-ui'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
-import { IPutProfileInfoResponse, PutProfileInfo } from '@services/traveler';
+import { PutProfileInfo } from '@services/traveler';
 import ContentSlideXAnimation from '@animations/ContentSlideX'
 import { useSelector } from 'react-redux';
 
@@ -88,16 +88,14 @@ const ProfileForm = () => {
       else {
         setIsLoading(true)
         const userProfileData = {
-          profileId: formResponse['step-0'],
-          locationTagsIds: formResponse['step-1'],
+          locationTagsIds: formResponse['step-0'],
+          profileId: formResponse['step-1'],
           averageSpendId: formResponse['step-2']
         }
         PutProfileInfo(userProfileData, authToken)
-          .then((response: IPutProfileInfoResponse) => {
-            if (response.success) {
-              toaster.success('Formulário realizado com sucesso', { duration: 3 })
-              navigate('/dashboard')
-            }
+          .then((response: any) => {
+            toaster.success('Formulário realizado com sucesso', { duration: 3 })
+            navigate('/dashboard')
           })
           .finally(() => {
             setIsLoading(false)
