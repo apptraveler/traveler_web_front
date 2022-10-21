@@ -6,7 +6,6 @@ interface IPrivateRouteParams {
 }
 
 const PrivateRoute = ({ token, children }: IPrivateRouteParams) => {
-  return children;
   if (!token) {
     return <Navigate to="/auth" replace />;
   }
