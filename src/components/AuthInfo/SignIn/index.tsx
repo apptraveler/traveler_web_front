@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema } from '@utils/validation'
 import { Login, ILoginParams, ILoginResponse } from '@services/authentication';
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setAuthToken } from '@store/authentication'
 
 function SignIn() {
@@ -17,16 +17,10 @@ function SignIn() {
     resolver: yupResolver(signInSchema)
   });
 
-  const [formData, setFormData] = React.useState({
-    email: '',
-    password: ''
-  })
-
   const [isLoading, setIsLoading] = React.useState(false)
 
   const onSubmit: SubmitHandler<ILoginParams> = async (data: any) => {
     setIsLoading(true)
-    setFormData(data)
 
     Login(data)
       .then((response: ILoginResponse) => {
